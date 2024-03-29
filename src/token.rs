@@ -1,27 +1,28 @@
-#[allow(unused)]
+#[derive(Debug, PartialEq)]
 pub struct Token {
 	pub token_type: TokenKind,
 	pub literal: String,
 }
 
 // we will feed string to the lexer for it for perform the lexicaly analysis
+#[derive(Debug, PartialEq)]
 pub enum TokenKind {
-	ILLEGAL(String),
-	EOF(String),
+	ILLEGAL ,
+	EOF,
 	// Identifiers + literals
-	IDENT(String), 				// add, foobar, x, y, ...
-	INT(String), 				// 729
+	IDENT, 	 // add, foobar, x, y, ...
+	INT, 	 // 729
 	// Operators
-	ASSIGN(String),
-	PLUS(String),
+	ASSIGN,
+	PLUS,
 	// Delimiters
-	COMMA(String),
-	SEMICOLON(String),
-	LPAREN(String),
-	RPAREN(String),
-	LBRACE(String),
-	RBRACE(String),
+	COMMA,
+	SEMICOLON,
+	LPAREN,
+	RPAREN,
+	LBRACE,
+	RBRACE,
 	// Keywords
-	FUNCTION(String),
-	LET(String),
+	FUNCTION,
+	LET,
 }

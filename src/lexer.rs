@@ -1,6 +1,5 @@
 use crate::token::{Token, TokenKind};
 
-#[allow(unused)]
 #[derive(Debug)]
 pub struct Lexer {
     input: String,
@@ -9,9 +8,8 @@ pub struct Lexer {
     ch: u8,                  // current char in examination
 }
 
-#[allow(unused)]
 impl Lexer {
-    fn new(input: String) -> Self {
+    pub fn new(input: String) -> Self {
         let mut l = Self { input, position: 0, read_position: 0, ch: 0 };
         l.read_char();
         return l;
@@ -21,40 +19,42 @@ impl Lexer {
         if self.read_position >= self.input.len() {
             self.ch = 0;
         } else {
-            self.ch = self.input.as_bytes()[self.read_position];
+            self.ch = self.input.as_bytes()[self.read_position]; // only ascii
         }
         self.position = self.read_position;
         self.read_position += 1;
     }
 
-	fn next_token(&mut self) -> Token  {
-		let token: Token = match self.ch.to_string().as_str() {
+	pub fn next_token(&mut self) -> Token  {
+		let literal = char::from_u32(self.ch as u32).unwrap().to_string();
+
+		let token: Token = match &literal[..] {
 			"=" => {
-				Token { token_type: TokenKind::ASSIGN(self.ch.to_string()),  literal: self.ch.to_string()  }
+				Token { token_type: TokenKind::ASSIGN ,  literal  }
 			}
 			";" => {
-				Token { token_type: TokenKind::SEMICOLON(self.ch.to_string()),  literal: self.ch.to_string()  }
+				Token { token_type: TokenKind::SEMICOLON,  literal  }
 			}
 			"(" => {
-				Token { token_type: TokenKind::LPAREN(self.ch.to_string()),  literal: self.ch.to_string()  }
+				Token { token_type: TokenKind::LPAREN,  literal  }
 			}
 			")" => {
-				Token { token_type: TokenKind::RPAREN(self.ch.to_string()),  literal: self.ch.to_string()  }
+				Token { token_type: TokenKind::RPAREN,  literal  }
 			}
 			"," => {
-				Token { token_type: TokenKind::COMMA(self.ch.to_string()),  literal: self.ch.to_string()  }
+				Token { token_type: TokenKind::COMMA,  literal  }
 			}
 			"+" => {
-				Token { token_type: TokenKind::PLUS(self.ch.to_string()),  literal: self.ch.to_string()  }
+				Token { token_type: TokenKind::PLUS,  literal  }
 			}
 			"{" => {
-				Token { token_type: TokenKind::LBRACE(self.ch.to_string()),  literal: self.ch.to_string()  }
+				Token { token_type: TokenKind::LBRACE,  literal  }
 			}
 			"}" => {
-				Token { token_type: TokenKind::RBRACE(self.ch.to_string()),  literal: self.ch.to_string()  }
+				Token { token_type: TokenKind::RBRACE,  literal  }
 			}
 			_ => {
-				Token { token_type: TokenKind::EOF("".to_string()),  literal: "".to_string()  }
+				Token { token_type: TokenKind::EOF,  literal: "".to_string()  }
 			}
 		};
 
