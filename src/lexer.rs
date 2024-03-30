@@ -39,15 +39,14 @@ impl Lexer {
 			"+" => { Token { token_type: TokenKind::PLUS,  literal  } }
 			"{" => { Token { token_type: TokenKind::LBRACE,  literal  } }
 			"}" => { Token { token_type: TokenKind::RBRACE,  literal  } }
-			_ => { 
+			"\0" => { Token { token_type: TokenKind::EOF,  literal: "".to_string() } }
+			 _  => { 
 				if self.is_letter() {
 					token.literal = self.read_identifier();
 					token.token_type = self.look_up_identifier(token.literal.clone()); 
 					return token;
-				} else if !self.is_letter() {
-					Token { token_type: TokenKind::ILLEGAL, literal } 
 				} else {
-					Token { token_type: TokenKind::EOF,  literal: "".to_string() } 
+					Token { token_type: TokenKind::ILLEGAL, literal } 
 				}
 			}
 		};
