@@ -8,7 +8,7 @@ mod tests {
 
 	#[test]
 	fn test_lexer() {
-		let input = "=+(){},;";
+		let input = "=+(){},; ";
 
 		let mut lexer = Lexer::new(input.to_string());
 		let mut v: Vec<Token> = Vec::new();
