@@ -4,17 +4,24 @@ pub struct Token {
 	pub literal: String,
 }
 
-// we will feed string to the lexer for it for perform the lexicaly analysis
 #[derive(Debug, PartialEq)]
 pub enum TokenKind {
-	ILLEGAL  ,
+	ILLEGAL,
 	EOF,
 	// Identifiers + literals
-	IDENT, 	 // add, foobar, x, y, ...
-	INT, 	 // 729
+	IDENT, 	
+	INT,
 	// Operators
 	ASSIGN,
 	PLUS,
+	MINUS,
+	BANG,
+	ASTERISK,
+	SLASH,
+	LT,
+	GT,
+	EQ,
+	NOTEQ,
 	// Delimiters
 	COMMA,
 	SEMICOLON,
@@ -25,4 +32,9 @@ pub enum TokenKind {
 	// Keywords
 	FUNCTION,
 	LET,
+	TRUE,
+	FALSE,
+	IF,
+	ELSE,
+	RETURN
 }

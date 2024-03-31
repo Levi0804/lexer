@@ -1,22 +1,13 @@
 #[allow(unused)]
 use crate::lexer::Lexer;
-use crate::token::{Token, TokenKind};
 
+pub mod repl;
 pub mod token;
 pub mod lexer;
 
 fn main() {
-	let input = "let x = 5";
-	let mut lexer = Lexer::new(input.to_string());
-	let mut v: Vec<Token> = Vec::new();
-	
-	let mut token = lexer.next_token();
-	while token.token_type != TokenKind::EOF {
-		v.push(token);
-		token = lexer.next_token();
-	}
+	let input = "let add = fn(x, y) { x + y; };";
 
-	v.push(token);
-
-	println!("{:#?}", v);
+	let output = repl::new(input);
+	println!("{:#?}", output);
 }
