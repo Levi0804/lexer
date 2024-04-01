@@ -1,6 +1,3 @@
-#[allow(unused)]
-use crate::lexer::Lexer;
-
 pub mod repl;
 pub mod token;
 pub mod lexer;
